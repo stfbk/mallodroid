@@ -1,31 +1,42 @@
-mallodroid
-==========
-# Crucial Changes
-This forked version is a python3 converted mallodroid version.
+# MalloDroid
 
-This version this version adds **internal APIs** and **save output (XML) to a file** with `-o output file`.
+MalloDroid is a small tool built on top of the [Androguard](https://github.com/androguard/androguard) reverse engineering framework able to analyze Android apps for broken TLS certificate validation.
 
-You **must** have python3 in order to proceed.
+This fork is a Python 3 converted and enhanced version of the original [MalloDroid](https://github.com/sfahl/mallodroid) combined with the patches provided by [@luckenzo](https://github.com/luckenzo/mallodroid).
 
-Check the fork-source for the original author.
+## Installation
 
-This repo include the https://github.com/luckenzo/mallodroid AndroGuard Changes.
+In order to use MalloDroid you have to install both Python 3 and Androguard
 
-## What it does
-Find broken SSL certificate validation in Android Apps. MalloDroid is a small tool built on top of the [androguard](https://github.com/androguard/androguard) reverse engineering framework for Android applications. Hence, androguard is required to use MalloDroid.
+```bash
+pip3 install -U androguard
+```
+and then clone this git repository by running
+```bash
+git clone https://github.com/stfbk/mallodroid.git
+```
 
-===============================
+## Usage
+Once in the right directory, run
+```bash
+./mallodroid.py <parameters>
+```
+where
 
-### Usage
-Example: ./mallodroid.py -f ExampleApp.apk -x
+### Parameters
 
-./mallodroid.py --help
+- `-h|--help`   show the help message
+- `-f|--file <PATH_TO_APK>` analyze the target apk
+- `-x|--xml` shop XML output
+- `-o <PATH_TO_FILE>` store the XML output to a file (\***New!**\*)
+- `-j|--java` show Java code results for non-XML output
+- `-d|--dir <DIR>` store in *DIR* decompiled apk's Java code for further analysis
 
-===============================
+example: `./mallodroid.py -f ExampleApp.apk -x`
 
-#### Internal API
+## Internal API (\*New!\*)
 
-You can now import mallodroid with `import mallodroid` and execute it with `mallodroid.main(*args)`. 
+You can now import MalloDroid with `import mallodroid` and execute it with `mallodroid.main(*args)`. 
 
 `*args` should have:
 
@@ -61,7 +72,12 @@ raw_results = mallodroid.main(args=['-f','ExampleApp.apk','-x'],stdout_suppress=
 print(raw_results)
 ```
 
+## License
 
+As mandated by the [original script](https://github.com/sfahl/mallodroid/blob/master/mallodroid.py), MalloDroid is free software: you can redistribute it and/or modify it under the terms of the GNU Lesser General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. You may obtain a copy of the License at
 
-### Contact
-Please do not hesitate to contact me if you have comments or questions.
+```
+https://www.gnu.org/licenses/lgpl-3.0.html
+```
+
+MalloDroid is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
